@@ -1,18 +1,27 @@
-document.querySelector(".btns span").onclick = function () {
-    let userName = prompt("What is your name? >:D");
-    
-    if (userName == "mohamed" || userName == "Mohamed" || userName == "mayar" || userName == "Mayar") {
-        console.log(`Hello ${userName} you are the best :D`)
-    }
 
+
+let timer = document.querySelector(".info .time span");
+let sec = 000;
+let interval;
+
+
+document.querySelector(".btns span").onclick = function () {
+    let userName = prompt("What is your name?");
     if (userName == null || userName == "") {
         document.querySelector(".name span").innerHTML = "Unknown";
     } else {
         document.querySelector(".name span").innerHTML = userName;
     }
-
     document.querySelector(".btns").remove();
+
+    interval = setInterval(starTime, 1000);
+    function starTime(){
+        sec++;
+        timer.innerHTML = `${sec} seconds`;
+    }
 };
+
+
 
 
 let duration = 1000;
@@ -21,18 +30,16 @@ let blocksCon = document.querySelector(".blocks");
 
 let blocks = Array.from(blocksCon.children);
 
+let matched = 0;
+
+
 let range = [...Array(blocks.length).keys()];
 
-console.log(range)
-
 function shuffle(array) {
-
-    // Settings Vars
     let current = array.length,
         temp,
         random;
     while (current > 0) {
-      // Get Random Number
       random = Math.floor(Math.random() * current);
 
     current--;
@@ -48,10 +55,6 @@ function shuffle(array) {
 }
 
 shuffle(range);
-
-
-console.log(range)
-
 
 blocks.forEach((block, i) => {
 
@@ -86,6 +89,7 @@ function stopClick(){
 
 let correct = document.getElementById("correct");
 let wrong = document.getElementById("wrong");
+let win = document.getElementById("win");
 
 function match(first, second) {
     
@@ -98,6 +102,39 @@ function match(first, second) {
         first.classList.add("match");
         second.classList.add("match");
 
+        matched = matched + 2;
+
+        if (matched ==  20){
+            clearInterval(interval);
+            win.play();
+            let end = document.createElement("div");
+            let container = document.createElement("div");
+            let congrats = document.createElement("span");
+            let time = document.createElement("span");
+            let wrongA = document.createElement("span");
+            let restart = document.createElement("span");
+            end.classList.add("btns");
+            container.classList.add("end-con");
+            congrats.classList.add("congrats");
+            time.classList.add("content");
+            wrongA.classList.add("content");
+            restart.classList.add("restart");
+            congrats.innerHTML = "Congratulations";
+            time.innerHTML = `Time: ${sec} Second`;
+            wrongA.innerHTML = `Wrong Tries: ${mistakes.innerHTML}`;
+            restart.innerHTML = `Play Again`;
+            document.body.appendChild(end);
+            end.appendChild(container);
+            container.appendChild(congrats);
+            container.appendChild(time);
+            container.appendChild(wrongA);
+            container.appendChild(restart);
+
+            restart.addEventListener("click",function (){
+                location.reload();
+            });
+        }
+
         correct.play();
     } else {
         mistakes.innerHTML = parseInt(mistakes.innerHTML) + 1;
@@ -109,5 +146,12 @@ function match(first, second) {
 
     }
 }
+
+
+
+
+
+
+
 
 

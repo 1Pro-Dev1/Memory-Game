@@ -10,11 +10,14 @@
     <body>
 
         <div class="btns">
-            <span>Start The Game!</span>
+            <span id="start">Start The Game!</span>
         </div>
         <div class="info">
             <div class="name">
                 Hello <span></span>
+            </div>
+            <div class="time">
+                Time: <span>0 seconds</span>
             </div>
             <div class="tries">
                 Wrong Tries: <span>0</span>
@@ -146,6 +149,7 @@
 
         <audio id="correct" src="media/correct.wav"></audio>
         <audio id="wrong" src="media/wrong.wav"></audio>
+        <audio id="win" src="media/win.wav"></audio>
         <script src="js/main.js"></script>
     </body>
 </html>
