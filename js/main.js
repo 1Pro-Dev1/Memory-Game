@@ -4,6 +4,10 @@ let timer = document.querySelector(".info .time span");
 let sec = 000;
 let interval;
 
+let duration = 1000;
+let blocksCon = document.querySelector(".blocks");
+let blocks = Array.from(blocksCon.children);
+let matched = 0;
 
 document.querySelector(".btns span").onclick = function () {
     let userName = prompt("What is your name?");
@@ -14,23 +18,29 @@ document.querySelector(".btns span").onclick = function () {
     }
     document.querySelector(".btns").remove();
 
-    interval = setInterval(starTime, 1000);
+    blocks.forEach(box => {
+        box.classList.add("start-flip")
+    });
+
+    setTimeout(() =>{
+        blocks.forEach(box => {
+            box.classList.remove("start-flip");
+            box.classList.toggle("no-event");
+        });
+
+        setTimeout(() =>{
+            blocks.forEach(box => {
+                box.classList.toggle("no-event");
+            });
+        }, 750)
+        interval = setInterval(starTime, 1000);
+    }, 1500)
+
     function starTime(){
         sec++;
         timer.innerHTML = `${sec} seconds`;
     }
 };
-
-
-
-
-let duration = 1000;
-
-let blocksCon = document.querySelector(".blocks");
-
-let blocks = Array.from(blocksCon.children);
-
-let matched = 0;
 
 
 let range = [...Array(blocks.length).keys()];

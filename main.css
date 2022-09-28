@@ -119,10 +119,15 @@ body{
 }
 
 .block.flip,
-.block.match{
+.block.match,
+.block.start-flip{
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     transform: rotateY(180deg);
+    pointer-events: none;
+}
+
+.no-event{
     pointer-events: none;
 }
 
